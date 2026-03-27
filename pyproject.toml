@@ -1,0 +1,45 @@
+[project]
+name = "opnsense-mcp"
+version = "0.1.0"
+description = "MCP server exposing the OPNsense API to AI assistants"
+authors = [{name = "Justin Refi", email = "justinrefi@gmail.com"}]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "mcp[cli]>=1.0.0",
+    "opnsense-py>=0.1.0",
+]
+
+[project.scripts]
+opnsense-mcp = "opnsense_mcp.server:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "respx>=0.21.0",
+    "pytest-cov>=5.0.0",
+    "mypy>=1.10.0",
+    "ruff>=0.4.0",
+]
+
+[tool.uv.sources]
+opnsense-py = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["opnsense_mcp"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not integration'"
+markers = ["integration: requires live OPNsense instance"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
