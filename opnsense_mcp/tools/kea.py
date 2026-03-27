@@ -105,8 +105,16 @@ def kea_del_v6_subnet(uuid: str) -> dict[str, Any]:
 @mcp.tool()
 @handle_opnsense_errors
 def kea_search_leases() -> dict[str, Any]:
-    """List all current Kea DHCP leases."""
-    return get_client().kea.search_leases()
+    """List all current Kea DHCP leases (requires OPNsense with the kea/leases API)."""
+    from opnsense_py.exceptions import OPNsenseNotFoundError
+    try:
+        return get_client().kea.search_leases()
+    except OPNsenseNotFoundError:
+        raise ValueError(
+            "kea/leases/search endpoint not found (HTTP 404). "
+            "This endpoint is not available on this OPNsense version. "
+            "Use kea_search_v4_reservations to list static reservations instead."
+        )
 
 
 # ---- Service -----------------------------------------------------------------
