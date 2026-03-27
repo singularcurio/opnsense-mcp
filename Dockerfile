@@ -6,7 +6,7 @@ COPY pyproject.toml ./
 COPY opnsense_mcp/ ./opnsense_mcp/
 
 RUN pip install uv && \
-    uv pip install --system --no-cache .
+    UV_NO_SOURCES=1 uv pip install --system --no-cache .
 
 ENV OPNSENSE_MCP_TRANSPORT=sse
 ENV OPNSENSE_MCP_HOST=0.0.0.0
