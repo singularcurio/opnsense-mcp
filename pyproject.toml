@@ -1,6 +1,6 @@
 [project]
 name = "opnsense-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server exposing the OPNsense API to AI assistants"
 authors = [{name = "Justin Refi", email = "justinrefi@gmail.com"}]
 readme = "README.md"
