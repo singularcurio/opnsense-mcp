@@ -44,5 +44,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/opnsense-mcp:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/opnsense-mcp:${{ github.ref_name }}
+            singularcurio/opnsense-mcp:latest
+            singularcurio/opnsense-mcp:${{ github.ref_name }}
